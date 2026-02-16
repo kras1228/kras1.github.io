@@ -1,18 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <title>Моя страница</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Моя страница | kras1228</title>
     <style>
-        body { font-family: sans-serif; text-align: center; background: #f4f4f4; padding: 50px; }
-        .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: inline-block; }
-        h1 { color: #333; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+            max-width: 400px;
+        }
+        h1 { margin-bottom: 10px; font-size: 2.5em; }
+        p { opacity: 0.9; font-size: 1.1em; line-height: 1.6; }
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: white;
+            color: #764ba2;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
     </style>
 </head>
 <body>
     <div class="card">
-        <h1>Привет, мир! 🚀</h1>
-        <p>Это мой первый сайт на GitHub Pages.</p>
-        <p>Я только учусь, но это уже начало!</p>
+        <h1>Привет! 👋</h1>
+        <p>Меня зовут <b>kras1228</b>. Это мой первый проект на GitHub, созданный с нуля.</p>
+        <p>Сейчас я изучаю, как работает веб-разработка.</p>
+        <a href="https://github.com/kras1228" class="btn">Мой GitHub профиль</a>
     </div>
 </body>
 </html>
