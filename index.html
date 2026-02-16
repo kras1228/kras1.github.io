@@ -13,33 +13,36 @@
         body { background: var(--bg); color: #fff; font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
         #canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
 
-        /* Навбар с плеером */
         .nav-box {
             position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
             width: 95%; max-width: 1200px;
-            background: rgba(255,255,255,0.03); backdrop-filter: blur(20px);
+            background: rgba(255,255,255,0.03); backdrop-filter: blur(25px);
             border: 1px solid rgba(255,255,255,0.1); border-radius: 60px;
             padding: 10px 25px; z-index: 1000; display: flex; justify-content: space-between; align-items: center;
         }
         .nav-logo { font-weight: 700; color: var(--accent); text-decoration: none; font-size: 1.1rem; }
 
-        /* Управление музыкой */
-        .player-controls { display: flex; align-items: center; gap: 15px; background: rgba(0,0,0,0.3); padding: 5px 15px; border-radius: 40px; border: 1px solid rgba(255,77,0,0.2); }
-        .p-btn { background: none; border: none; color: #fff; cursor: pointer; font-size: 0.9rem; transition: 0.3s; }
-        .p-btn:hover { color: var(--accent); }
-        #track-name { font-family: 'JetBrains Mono'; font-size: 10px; color: #aaa; width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-        /* Hero */
-        section { min-height: 100vh; display: flex; align-items: center; padding: 100px 0; }
-        .hero-h { font-size: clamp(2.5rem, 8vw, 4.5rem); letter-spacing: -2px; line-height: 1; }
+        .player-controls { display: flex; align-items: center; gap: 12px; background: rgba(0,0,0,0.4); padding: 6px 18px; border-radius: 40px; border: 1px solid rgba(255,77,0,0.15); }
+        .p-btn { background: none; border: none; color: #fff; cursor: pointer; font-size: 0.85rem; transition: 0.3s; padding: 0 4px; }
+        .p-btn:hover { color: var(--accent); transform: scale(1.1); }
         
-        /* Карточки */
+        #track-name { font-family: 'JetBrains Mono'; font-size: 10px; color: #fff; width: 110px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-transform: uppercase; }
+        
+        .vol-wrap { display: flex; align-items: center; gap: 8px; margin-left: 5px; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 12px; }
+        #vol-slider { width: 50px; height: 3px; accent-color: var(--accent); cursor: pointer; opacity: 0.6; transition: 0.3s; }
+        #vol-slider:hover { opacity: 1; }
+
+        section { min-height: 100vh; display: flex; align-items: center; padding: 100px 0; }
+        .hero-h { font-size: clamp(2.5rem, 8vw, 4.5rem); letter-spacing: -2px; line-height: 1; margin-bottom: 20px; }
+        .stack-badges { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 25px; }
+        .badge-item { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 6px 15px; border-radius: 10px; font-family: 'JetBrains Mono'; font-size: 12px; color: #888; }
+        
         .glass-card {
             background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08);
-            border-radius: var(--r); padding: 40px; height: 100%; backdrop-filter: blur(10px);
-            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); transform-style: preserve-3d;
+            border-radius: var(--r); padding: 40px; height: 100%; backdrop-filter: blur(15px);
+            transition: transform 0.7s cubic-bezier(0.2, 1, 0.2, 1); transform-style: preserve-3d;
         }
-        .glass-card:hover { border-color: var(--accent); }
+        .glass-card:hover { border-color: var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
         
         .mc-item { width: 35px; height: 35px; background: #222; box-shadow: inset -4px -4px 0 #000, inset 4px 4px 0 #444; position: relative; display: inline-block; animation: float 3s infinite ease-in-out; }
         .mc-o { position: absolute; top: 8px; left: 8px; width: 6px; height: 6px; background: #00fbff; box-shadow: 12px 10px 0 #00fbff, 4px 16px 0 #00fbff; }
@@ -58,10 +61,14 @@
     <a href="#" class="nav-logo">KRAS</a>
     
     <div class="player-controls">
-        <button class="p-btn" id="prev"><i class="fas fa-step-backward"></i></button>
+        <button class="p-btn" id="prev"><i class="fas fa-backward"></i></button>
         <button class="p-btn" id="play"><i class="fas fa-play"></i></button>
-        <button class="p-btn" id="next"><i class="fas fa-step-forward"></i></button>
-        <div id="track-name">Miyagi - Bullet</div>
+        <button class="p-btn" id="next"><i class="fas fa-forward"></i></button>
+        <div id="track-name">MIYAGI - BULLET</div>
+        <div class="vol-wrap">
+            <i class="fas fa-volume-down" style="font-size: 8px; opacity: 0.5;"></i>
+            <input type="range" id="vol-slider" min="0" max="1" step="0.05" value="0.5">
+        </div>
     </div>
 
     <div class="d-none d-md-flex align-items-center">
@@ -74,9 +81,16 @@
         <div class="col-lg-10">
             <div class="mc-item mb-4"><div class="mc-o"></div></div>
             <h1 class="hero-h">Code & <span style="color:var(--accent)">Blocks.</span></h1>
-            <p class="text-secondary mt-3 fs-5" style="font-family: 'JetBrains Mono'; max-width: 500px;">
-                16-летний разработчик. Пишу на Python/JS, создаю и настраиваю миры.
+            <p class="text-secondary fs-5" style="font-family: 'JetBrains Mono'; max-width: 550px;">
+                16 лет. Разработка интерфейсов, автоматизация на Python и глубокая настройка игровых систем.
             </p>
+            <div class="stack-badges">
+                <div class="badge-item">HTML5</div>
+                <div class="badge-item">CSS3</div>
+                <div class="badge-item">BOOTSTRAP 5</div>
+                <div class="badge-item">JAVASCRIPT</div>
+                <div class="badge-item">PYTHON</div>
+            </div>
         </div>
     </div>
 </section>
@@ -86,18 +100,18 @@
         <div class="col-md-6">
             <div class="glass-card tilt">
                 <h3 class="mb-4">Development</h3>
-                <p class="text-secondary small">Автоматизация на Python, разработка интерфейсов и чистая верстка.</p>
+                <p class="text-secondary small">Создание адаптивных сайтов на Bootstrap и скриптов для упрощения жизни.</p>
                 <div class="mt-4" style="color:var(--accent); font-size: 1.5rem;">
-                    <i class="fab fa-python me-3"></i><i class="fab fa-js"></i>
+                    <i class="fab fa-html5 me-3"></i><i class="fab fa-css3-alt me-3"></i><i class="fab fa-bootstrap me-3"></i><i class="fab fa-python"></i>
                 </div>
             </div>
         </div>
         <div class="col-md-6">
             <div class="glass-card tilt">
                 <h3 class="mb-4">Minecraft Tech</h3>
-                <p class="text-secondary small">Гибкая настройка серверов, детальная работа с плагинами и оптимизация систем.</p>
-                <div class="mt-4" style="font-family: 'JetBrains Mono'; color: var(--accent); font-size: 0.8rem;">
-                    CONFIG // PLUGINS // OPTIMIZATION
+                <p class="text-secondary small">Гибкая настройка серверов, детальная работа с плагинами и оптимизация ресурсов.</p>
+                <div class="mt-4" style="font-family: 'JetBrains Mono'; color: var(--accent); font-size: 0.8rem; letter-spacing: 2px;">
+                    CONFIG // PLUGINS // DEV
                 </div>
             </div>
         </div>
@@ -118,7 +132,7 @@
         cvs.width = window.innerWidth;
         cvs.height = window.innerHeight;
         pts = [];
-        for(let i=0; i<80; i++) pts.push({ x: Math.random()*cvs.width, y: Math.random()*cvs.height, vx: (Math.random()-0.5)*0.5, vy: (Math.random()-0.5)*0.5 });
+        for(let i=0; i<85; i++) pts.push({ x: Math.random()*cvs.width, y: Math.random()*cvs.height, vx: (Math.random()-0.5)*0.5, vy: (Math.random()-0.5)*0.5 });
     }
 
     function lightning() {
@@ -150,7 +164,7 @@
             if(p.x<0 || p.x>cvs.width) p.vx *= -1;
             if(p.y<0 || p.y>cvs.height) p.vy *= -1;
             ctx.fillStyle = '#222';
-            ctx.beginPath(); ctx.arc(p.x, p.y, 1, 0, Math.PI*2); ctx.fill();
+            ctx.beginPath(); ctx.arc(p.x, p.y, 1.2, 0, Math.PI*2); ctx.fill();
             let d = Math.hypot(m.x - p.x, m.y - p.y);
             if(d < 180) {
                 ctx.strokeStyle = `rgba(255, 77, 0, ${1 - d/180})`;
@@ -165,28 +179,27 @@
     window.addEventListener('resize', init);
     init(); draw();
 
-    // 3D Tilt
     const cards = document.querySelectorAll('.tilt');
     cards.forEach(c => {
         c.addEventListener('mousemove', e => {
             const r = c.getBoundingClientRect();
             const x = (e.clientX - r.left) - r.width/2;
             const y = (e.clientY - r.top) - r.height/2;
-            c.style.transform = `rotateY(${x / 30}deg) rotateX(${-y / 30}deg)`;
+            c.style.transform = `rotateY(${x / 35}deg) rotateX(${-y / 35}deg)`;
         });
         c.addEventListener('mouseleave', () => c.style.transform = `rotateY(0deg) rotateX(0deg)`);
     });
 
-    // Плеер
     const tracks = [
-        { name: "Miyagi - Bullet", src: "ССЫЛКА_1" },
-        { name: "Miyagi - Captain", src: "ССЫЛКА_2" },
-        { name: "Miyagi - Minor", src: "ССЫЛКА_3" }
+        { name: "MIYAGI - BULLET", src: "LINK_1" },
+        { name: "MIYAGI - MINOR", src: "LINK_2" },
+        { name: "MIYAGI - CAPTAIN", src: "LINK_3" }
     ];
     let cur = 0;
     const aud = new Audio(tracks[cur].src);
     const pBtn = document.getElementById('play');
     const tName = document.getElementById('track-name');
+    const vSli = document.getElementById('vol-slider');
 
     function updateTrack() {
         aud.src = tracks[cur].src;
@@ -198,6 +211,8 @@
         if(aud.paused) { aud.play(); pBtn.innerHTML = '<i class="fas fa-pause"></i>'; }
         else { aud.pause(); pBtn.innerHTML = '<i class="fas fa-play"></i>'; }
     };
+
+    vSli.oninput = (e) => { aud.volume = e.target.value; };
 
     document.getElementById('next').onclick = () => { cur = (cur + 1) % tracks.length; updateTrack(); aud.play(); pBtn.innerHTML = '<i class="fas fa-pause"></i>'; };
     document.getElementById('prev').onclick = () => { cur = (cur - 1 + tracks.length) % tracks.length; updateTrack(); aud.play(); pBtn.innerHTML = '<i class="fas fa-pause"></i>'; };
