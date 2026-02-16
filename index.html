@@ -3,50 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Портфолио • Kras</title>
+    <title>kras1228 | Links</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #0f0f0f; /* Глубокий темный фон */
+            color: white;
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            color: white;
+            align-items: flex-start;
+            min-height: 100vh;
         }
-        .card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 20px;
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            padding: 40px 20px;
             text-align: center;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.2);
-            max-width: 400px;
         }
-        h1 { margin-bottom: 10px; font-size: 2.5em; }
-        p { opacity: 0.9; font-size: 1.1em; line-height: 1.6; }
-        .btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 12px 25px;
-            background: white;
-            color: #764ba2;
+
+        .profile-img {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            border: 2px solid #333;
+            margin-bottom: 16px;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .description {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 32px;
+        }
+
+        /* Стили кнопок-ссылок */
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .link-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 16px;
+            border-radius: 12px;
             text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
+            color: white;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .link-card:hover {
+            background: #252525;
+            transform: translateY(-2px);
+            border-color: #444;
+        }
+
+        .link-card i {
+            position: absolute;
+            left: 20px;
+            font-size: 18px;
+        }
+
+        /* Секция иконок внизу */
+        .socials {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .socials a {
+            color: #999;
+            font-size: 24px;
             transition: 0.3s;
         }
-        .btn:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+
+        .socials a:hover {
+            color: white;
+        }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h1>Привет! 👋</h1>
-        <p>Меня зовут <b>kras1228</b>. Это мой первый проект на GitHub, созданный с нуля.</p>
-        <p>Сейчас я изучаю, как работает веб-разработка.</p>
-        <a href="https://github.com/kras1228" class="btn">Мой GitHub профиль</a>
+
+<div class="container">
+    <img src="https://github.com/kras1228.png" alt="Avatar" class="profile-img">
+    
+    <h1>kras1228</h1>
+    <p class="description">Разработчик & Геймер</p>
+
+    <div class="links-container">
+        <a href="https://t.me/твой_ник" target="_blank" class="link-card">
+            <i class="fab fa-telegram"></i> Telegram
+        </a>
+
+        <a href="https://discord.com" target="_blank" class="link-card">
+            <i class="fab fa-discord"></i> Мой Discord
+        </a>
+
+        <a href="https://github.com/kras1228" target="_blank" class="link-card">
+            <i class="fab fa-github"></i> Мой GitHub
+        </a>
     </div>
+
+    <div class="socials">
+        <a href="#"><i class="fab fa-steam"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-twitch"></i></a>
+    </div>
+</div>
+
 </body>
 </html>
