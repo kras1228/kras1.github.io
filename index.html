@@ -13,187 +13,239 @@
     <style>
         :root {
             --accent: #ff4d00;
-            --bg: #0a0a0a;
+            --bg: #080808;
             --text: #ffffff;
-            --glass: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.08);
+            --glass: rgba(255, 255, 255, 0.02);
+            --border: rgba(255, 255, 255, 0.07);
         }
 
-        body, html {
-            margin: 0; padding: 0;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
             background-color: var(--bg);
             color: var(--text);
             font-family: 'Space Grotesk', sans-serif;
             overflow-x: hidden;
-            scroll-behavior: smooth;
         }
 
-        /* --- Эффект Шершавого Зерна (Film Grain) --- */
         body::before {
             content: "";
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: url('https://grainy-gradients.vercel.app/noise.svg');
-            opacity: 0.05;
+            opacity: 0.04;
             pointer-events: none;
-            z-index: 9999;
+            z-index: 999;
         }
 
-        /* --- Интерактивный фон --- */
         #canvas {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            filter: blur(1px);
+            background: radial-gradient(circle at center, #111 0%, #080808 100%);
         }
 
-        /* --- Стилизация Секций --- */
-        .section {
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { 
+            background: linear-gradient(transparent, var(--accent), transparent); 
+            border-radius: 10px; 
+        }
+
+        .full-page {
             min-height: 100vh;
             display: flex;
             align-items: center;
+            padding: 100px 0;
             position: relative;
-            padding: 80px 0;
         }
 
-        /* --- Аватар --- */
-        .avatar-wrapper {
-            position: relative;
-            width: 120px; height: 120px;
-            margin-bottom: 30px;
-        }
-        .avatar-img {
-            width: 100%; height: 100%;
-            border-radius: 30px;
-            background: #111;
-            border: 2px solid var(--border);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 3rem; color: var(--accent);
-            box-shadow: 0 0 30px rgba(255, 77, 0, 0.2);
-        }
-
-        /* --- 3D Карточки --- */
-        .card-3d {
+        .avatar-box {
+            width: 100px; height: 100px;
             background: var(--glass);
             border: 1px solid var(--border);
-            backdrop-filter: blur(12px);
+            border-radius: 25px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.5rem; color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-bottom: 30px;
+        }
+
+        .hero-name {
+            font-size: clamp(3.5rem, 10vw, 6rem);
+            font-weight: 700;
+            letter-spacing: -3px;
+            margin-bottom: 0;
+            background: linear-gradient(to bottom, #fff 40%, #555);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .mono { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; }
+
+        .glass-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
             padding: 40px;
             border-radius: 24px;
+            transition: border-color 0.4s ease;
             transform-style: preserve-3d;
             transform: perspective(1000px);
-            transition: transform 0.1s ease, border-color 0.4s ease;
         }
-        .card-3d:hover { border-color: var(--accent); }
+        .glass-card:hover { border-color: var(--accent); }
 
-        /* --- Minecraft Artifact --- */
+        .tech-icon {
+            font-size: 2.8rem;
+            margin: 10px;
+            color: #444;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .tech-icon:hover { color: var(--accent); transform: translateY(-10px) scale(1.1); }
+
         .mc-block {
-            width: 40px; height: 40px;
-            background: #222;
-            border: 3px solid #111;
+            width: 32px; height: 32px;
+            background: #333;
+            box-shadow: inset -3px -3px 0 #111, inset 3px 3px 0 #666;
             position: relative;
-            box-shadow: inset -4px -4px 0 #444, inset 4px 4px 0 #888;
-            margin-bottom: 20px;
             display: inline-block;
-            animation: pulse 2s infinite;
+            vertical-align: middle;
+            margin-right: 15px;
+            animation: float 3s infinite ease-in-out;
         }
         .mc-ore {
-            position: absolute; top: 8px; left: 8px; width: 8px; height: 8px;
-            background: #00fbff; box-shadow: 12px 10px 0 #00fbff, 4px 18px 0 #00fbff;
+            position: absolute; top: 6px; left: 6px; width: 6px; height: 6px;
+            background: #00fbff; box-shadow: 10px 8px 0 #00fbff, 4px 14px 0 #00fbff;
         }
-        @keyframes pulse {
-            0%, 100% { filter: drop-shadow(0 0 5px #00fbff55); }
-            50% { filter: drop-shadow(0 0 15px #00fbff); }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
-        /* --- Стек --- */
-        .tech-icon {
-            font-size: 2.5rem;
-            margin: 15px;
-            color: #555;
-            transition: 0.3s;
+        .music-bar {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            padding: 10px 20px;
+            border-radius: 100px;
+            display: flex; align-items: center; gap: 15px;
+            z-index: 1000;
         }
-        .tech-icon:hover { color: var(--accent); transform: scale(1.2); }
+        .play-btn {
+            background: var(--accent); border: none; width: 35px; height: 35px;
+            border-radius: 50%; color: white; cursor: pointer;
+        }
 
-        /* --- Кастомный скролл --- */
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 5px; }
-
-        .mono { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 0.9rem; }
+        .social-link { font-size: 1.5rem; color: #fff; margin-right: 20px; transition: 0.3s; }
+        .social-link:hover { color: var(--accent); transform: scale(1.2); }
     </style>
 </head>
 <body>
 
     <canvas id="canvas"></canvas>
 
-    <section class="section container">
-        <div class="row align-items-center">
-            <div class="col-lg-7">
-                <div class="avatar-wrapper">
-                    <div class="avatar-img">
-                        <i class="fa-solid fa-user-ninja"></i> </div>
+    <section class="full-page container">
+        <div class="row w-100">
+            <div class="col-lg-8">
+                <div class="avatar-box">
+                    <i class="fa-solid fa-code"></i>
                 </div>
-                <div class="mono mb-2">// status: learning_programming</div>
-                <h1 class="display-1 fw-bold mb-3" style="letter-spacing: -3px;">kras</h1>
-                <p class="lead text-secondary mb-5" style="max-width: 500px;">
-                    16 лет. Исследую возможности Python и JS. Создаю цифровые миры в Minecraft и интерфейсы в вебе.
+                <div class="mono mb-2">// 16_years_old_developer</div>
+                <h1 class="hero-name">kras</h1>
+                <p class="text-secondary fs-5 mb-5 mt-3" style="max-width: 600px;">
+                    Создаю цифровой опыт через код и творчество. Minecraft enjoyer, изучающий магию Python и фронтенда.
                 </p>
-                <div class="d-flex gap-4">
-                    <a href="https://t.me/pik_fra" class="text-white fs-3"><i class="fab fa-telegram"></i></a>
-                    <a href="https://discord.com/users/1186341967806865450" class="text-white fs-3"><i class="fab fa-discord"></i></a>
+                <div class="d-flex align-items-center">
+                    <a href="https://t.me/pik_fra" class="social-link"><i class="fab fa-telegram"></i></a>
+                    <a href="https://discord.com/users/1186341967806865450" class="social-link"><i class="fab fa-discord"></i></a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section container">
-        <div class="row g-5">
-            <div class="col-lg-5">
-                <div class="mc-block"><div class="mc-ore"></div></div>
-                <h2 class="fw-bold mb-4">Технологический <br><span style="color:var(--accent)">стек.</span></h2>
-                <p class="text-secondary">Постоянно расширяю свой инструментарий, переходя от простой верстки к сложной логике на стороне сервера.</p>
-                <div class="d-flex flex-wrap mt-4">
-                    <i class="devicon-html5-plain tech-icon"></i>
-                    <i class="devicon-css3-plain tech-icon"></i>
-                    <i class="devicon-bootstrap-plain tech-icon"></i>
-                    <i class="devicon-javascript-plain tech-icon"></i>
-                    <i class="devicon-python-plain tech-icon"></i>
+    <section class="full-page container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6">
+                <div class="mono mb-3">// technology_stack</div>
+                <h2 class="display-4 fw-bold mb-4">Инструменты, которые я <span style="color:var(--accent)">использую</span></h2>
+                <div class="d-flex flex-wrap mb-4">
+                    <i class="devicon-html5-plain tech-icon" title="HTML5"></i>
+                    <i class="devicon-css3-plain tech-icon" title="CSS3"></i>
+                    <i class="devicon-bootstrap-plain tech-icon" title="Bootstrap"></i>
+                    <i class="devicon-javascript-plain tech-icon" title="JavaScript"></i>
+                    <i class="devicon-python-plain tech-icon" title="Python"></i>
                 </div>
+                <p class="text-secondary">
+                    Мой основной фокус — создание отзывчивых веб-интерфейсов и автоматизация процессов на Python. В свободное время занимаюсь технической настройкой игровых миров.
+                </p>
             </div>
-            <div class="col-lg-7">
-                <div class="card-3d" id="tilt-card">
-                    <h4 class="mb-4 mono">01. Веб-разработка</h4>
-                    <p class="text-secondary small">Верстаю адаптивные проекты, используя современные стандарты HTML5/CSS3. Сейчас в приоритете углубление в архитектуру JavaScript.</p>
-                    <hr class="my-4" style="opacity: 0.1;">
-                    <h4 class="mb-4 mono">02. Game Tech</h4>
-                    <p class="text-secondary small">Конфигурация серверов, работа с JSON/YAML и создание кастомного опыта в Minecraft.</p>
+            <div class="col-lg-6">
+                <div class="glass-card tilt">
+                    <div class="mc-block"><div class="mc-ore"></div></div>
+                    <h4 class="mb-3">Minecraft & Dev</h4>
+                    <p class="text-secondary small">
+                        Сочетаю гейм-дизайн и программирование. Работаю с JSON конфигурациями, администрированием серверов и созданием уникального комьюнити-опыта.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
+
+    <section class="full-page container text-center">
+        <div class="w-100">
+            <h2 class="display-5 fw-bold mb-5">Чем я <span style="color:var(--accent)">занимаюсь?</span></h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="glass-card tilt h-100">
+                        <i class="fa-solid fa-terminal mb-4 fs-2 text-gradient"></i>
+                        <h5>Backend</h5>
+                        <p class="text-secondary small">Изучаю логику Python для создания скриптов и ботов.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-card tilt h-100">
+                        <i class="fa-solid fa-code-branch mb-4 fs-2 text-gradient"></i>
+                        <h5>Frontend</h5>
+                        <p class="text-secondary small">Верстаю современные адаптивные сайты с чистым кодом.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-card tilt h-100">
+                        <i class="fa-solid fa-cubes mb-4 fs-2 text-gradient"></i>
+                        <h5>Server Side</h5>
+                        <p class="text-secondary small">Оптимизация и настройка сложных систем в игровых средах.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-5 text-center opacity-50">
+        <p class="small mono">© 2026 kras // built_with_passion</p>
+    </footer>
+
+    <div class="music-bar">
+        <button class="play-btn" id="mPlay"><i class="fas fa-play"></i></button>
+        <div style="font-size: 12px; font-weight: 500;">Miyagi & Эндшпиль - Bullet</div>
+        <input type="range" id="mVol" min="0" max="1" step="0.1" value="0.5" style="width: 60px; accent-color: var(--accent);">
+        <audio id="mAudio" src="ТВОЯ_ССЫЛКА_НА_MP3" loop></audio>
+    </div>
 
     <script>
-        // --- 3D TILT EFFECT ---
-        const card = document.getElementById('tilt-card');
-        document.addEventListener('mousemove', (e) => {
-            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-            card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-        });
-
-        // --- BACKGROUND CONNECT DOTS ---
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         let points = [];
-        const mouse = { x: null, y: null };
+        const mouse = { x: null, y: null, radius: 150 };
 
         function init() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             points = [];
-            for(let i=0; i<80; i++) {
+            for(let i=0; i<100; i++) {
                 points.push({
                     x: Math.random()*canvas.width,
                     y: Math.random()*canvas.height,
-                    vx: (Math.random()-0.5)*0.5,
-                    vy: (Math.random()-0.5)*0.5
+                    vx: (Math.random()-0.5)*0.7,
+                    vy: (Math.random()-0.5)*0.7
                 });
             }
         }
@@ -205,23 +257,54 @@
                 if(p.x<0 || p.x>canvas.width) p.vx *= -1;
                 if(p.y<0 || p.y>canvas.height) p.vy *= -1;
                 
-                ctx.fillStyle = 'rgba(255,255,255,0.2)';
-                ctx.beginPath(); ctx.arc(p.x, p.y, 1.5, 0, Math.PI*2); ctx.fill();
+                ctx.fillStyle = 'rgba(255,255,255,0.3)';
+                ctx.beginPath(); ctx.arc(p.x, p.y, 1.2, 0, Math.PI*2); ctx.fill();
 
                 let dist = Math.hypot(mouse.x - p.x, mouse.y - p.y);
-                if(dist < 150) {
-                    ctx.strokeStyle = `rgba(255, 77, 0, ${1 - dist/150})`;
-                    ctx.lineWidth = 0.5;
+                if(dist < mouse.radius) {
+                    ctx.strokeStyle = `rgba(255, 77, 0, ${1 - dist/mouse.radius})`;
+                    ctx.lineWidth = 0.8;
                     ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
                 }
             });
             requestAnimationFrame(animate);
         }
 
-        window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
+        window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
         window.addEventListener('resize', init);
         init(); animate();
-    </script>
 
+        const cards = document.querySelectorAll('.tilt');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const xc = rect.width / 2;
+                const yc = rect.height / 2;
+                const dx = x - xc;
+                const dy = y - yc;
+                card.style.transform = `perspective(1000px) rotateY(${dx / 20}deg) rotateX(${-dy / 20}deg)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
+            });
+        });
+
+        const audio = document.getElementById('mAudio');
+        const playBtn = document.getElementById('mPlay');
+        const vol = document.getElementById('mVol');
+
+        playBtn.onclick = () => {
+            if (audio.paused) {
+                audio.play();
+                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            } else {
+                audio.pause();
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            }
+        };
+        vol.oninput = () => { audio.volume = vol.value; };
+    </script>
 </body>
 </html>
