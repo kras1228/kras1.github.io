@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,8 +12,8 @@
     <meta property="og:url" content="https://kras-dev.com">
     <meta name="theme-color" content="#ff4d00">
     
-    <title>KRAS // Developer Portfolio</title>
-
+    <title>KRAS // Developer Portfolio | Web & Python Developer</title>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -38,13 +37,8 @@
             font-family: 'Space Grotesk', sans-serif; 
             overflow-x: hidden;
             transition: background-color var(--transition);
-            --text: #fff;
-            --card-bg: rgba(255,255,255,0.02);
-            --border: rgba(255,255,255,0.08);
-            --radius: 25px; 
         }
         
-
         body.light-mode {
             background: #f8f9fa;
             color: #000;
@@ -73,10 +67,6 @@
             width: 100%; 
             height: 100%; 
             z-index: -1; 
-            --bg: #f5f5f5;
-            --text: #111;
-            --card-bg: rgba(0,0,0,0.03);
-            --border: rgba(0,0,0,0.1);
         }
 
         .nav-box {
@@ -110,9 +100,7 @@
             font-size: 1.1rem;
             transition: var(--transition);
         }
-        * { margin:0; padding:0; box-sizing:border-box; transition: background 0.3s, color 0.3s; }
-        body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
-
+        
         .nav-logo:hover {
             transform: scale(1.05);
             text-shadow: 0 0 20px rgba(255,77,0,0.5);
@@ -141,7 +129,6 @@
         .nav-links a:hover {
             color: var(--accent);
         }
-        #canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
 
         .nav-links a::after {
             content: '';
@@ -156,12 +143,6 @@
 
         .nav-links a:hover::after {
             width: 100%;
-        .nav-box {
-            position: fixed; top: 15px; left: 50%; transform: translateX(-50%);
-            width: 95%; max-width: 1300px;
-            background: rgba(255,255,255,0.05); backdrop-filter: blur(20px);
-            border: 1px solid var(--border); border-radius: 60px;
-            padding: 8px 20px; z-index: 1000; display: flex; justify-content: space-between; align-items: center;
         }
 
         .player-controls { 
@@ -223,13 +204,8 @@
             opacity: 0.6; 
             transition: opacity var(--transition); 
         }
-        .player-controls { display: flex; align-items: center; gap: 10px; background: rgba(0,0,0,0.2); padding: 5px 12px; border-radius: 40px; }
-        .p-btn { background: none; border: none; color: var(--text); cursor: pointer; font-size: 0.8rem; }
-
+        
         #vol-slider:hover { opacity: 1; }
-        .settings-btns { display: flex; gap: 10px; align-items: center; }
-        .btn-ui { background: var(--card-bg); border: 1px solid var(--border); color: var(--text); padding: 5px 12px; border-radius: 20px; font-size: 11px; cursor: pointer; font-family: 'JetBrains Mono'; }
-        .btn-ui:hover { border-color: var(--accent); }
 
         .theme-toggle {
             background: none;
@@ -259,7 +235,6 @@
             padding: 100px 0; 
             position: relative;
         }
-        section { min-height: 100vh; display: flex; align-items: center; padding: 100px 0; }
 
         section:first-of-type {
             min-height: 100vh;
@@ -308,7 +283,6 @@
             transform: translateY(-2px);
         }
         
-        .card-3d-wrap { perspective: 1000px; height: 100%; }
         .glass-card {
             background: rgba(255,255,255,0.02); 
             border: 1px solid rgba(255,255,255,0.08);
@@ -546,11 +520,7 @@
         @keyframes float { 
             0%, 100% { transform: translateY(0); } 
             50% { transform: translateY(-12px); } 
-            background: var(--card-bg); border: 1px solid var(--border);
-            border-radius: var(--radius); padding: 35px; height: 100%; backdrop-filter: blur(10px);
-            transition: transform 0.6s cubic-bezier(0.2, 1, 0.2, 1); transform-style: preserve-3d;
         }
-        .glass-card:hover { border-color: var(--accent); }
 
         @keyframes slideInLeft {
             from {
@@ -561,12 +531,6 @@
                 opacity: 1;
                 transform: translateX(0);
             }
-        .skill-item { margin-bottom: 20px; }
-        .skill-header { display: flex; justify-content: space-between; font-family: 'JetBrains Mono'; font-size: 12px; margin-bottom: 5px; }
-        .progress-bar-bg { background: rgba(255,255,255,0.05); height: 6px; border-radius: 10px; overflow: hidden; }
-        .progress-fill { 
-            background: var(--accent); height: 100%; width: 0; 
-            transition: width 2s ease-out; box-shadow: 0 0 10px var(--accent);
         }
 
         @keyframes slideInUp {
@@ -578,11 +542,7 @@
                 opacity: 1;
                 transform: translateY(0);
             }
-        .contact-form input, .contact-form textarea {
-            background: var(--card-bg); border: 1px solid var(--border);
-            border-radius: 15px; padding: 12px; width: 100%; color: var(--text); margin-bottom: 15px;
         }
-        .submit-btn { background: var(--accent); color: #fff; border: none; padding: 12px 30px; border-radius: 50px; font-weight: bold; width: 100%; }
 
         @keyframes fadeInUp {
             from {
@@ -638,11 +598,9 @@
         .mb-4 { margin-bottom: 2rem !important; }
         .mt-4 { margin-top: 2rem !important; }
         .mt-3 { margin-top: 1.5rem !important; }
-        footer { text-align: center; padding: 40px; opacity: 0.5; font-size: 0.8rem; font-family: 'JetBrains Mono'; }
     </style>
 </head>
 <body>
-<body class="dark-mode">
 
 <canvas id="canvas"></canvas>
 
@@ -656,11 +614,8 @@
             <li><a href="#skills">Skills</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
-    <div class="settings-btns">
-        <button class="btn-ui" onclick="toggleLang()" id="langBtn">EN</button>
-        <button class="btn-ui" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
     </div>
-
+    
     <div class="player-controls">
         <button class="p-btn" id="prev" title="Previous track"><i class="fas fa-backward"></i></button>
         <button class="p-btn" id="play" title="Play/Pause"><i class="fas fa-play"></i></button>
@@ -670,19 +625,12 @@
             <i class="fas fa-volume-down" style="font-size: 8px; opacity: 0.5;"></i>
             <input type="range" id="vol-slider" min="0" max="1" step="0.05" value="0.5" title="Volume">
         </div>
-    <div class="player-controls d-none d-lg-flex">
-        <button class="p-btn" id="prev"><i class="fas fa-backward"></i></button>
-        <button class="p-btn" id="play"><i class="fas fa-play"></i></button>
-        <button class="p-btn" id="next"><i class="fas fa-forward"></i></button>
-        <div id="track-name" style="font-size: 9px; width: 100px; overflow: hidden;">MIYAGI - BULLET</div>
     </div>
 
     <button class="theme-toggle" id="theme-toggle" title="Toggle theme"><i class="fas fa-moon"></i></button>
-    <a href="https://t.me/pik_fra" class="btn-ui" style="text-decoration: none;">TG</a>
 </nav>
 
 <section class="container" id="home">
-<section class="container">
     <div class="row">
         <div class="col-lg-10">
             <div class="mc-item mb-4"><div class="mc-o"></div></div>
@@ -701,7 +649,6 @@
         </div>
     </div>
 </section>
-
 <section class="container" id="about">
     <div class="row g-4">
         <div class="col-md-6">
@@ -765,9 +712,6 @@
                     <a href="#" class="btn btn-sm btn-outline-warning disabled"><i class="fas fa-lock me-1"></i>Private</a>
                 </div>
             </div>
-            <p style="color:var(--accent); font-family: 'JetBrains Mono'; letter-spacing: 4px;" id="locText">Location: У тебя дома)</p>
-            <h1 class="display-1 fw-bold mb-4" id="heroTitle">Code & Blocks.</h1>
-            <p class="text-secondary fs-5" id="heroSub">16 years old. Programming reality and building worlds.</p>
         </div>
     </div>
 </section>
@@ -817,13 +761,6 @@
                 <h5>Bootstrap</h5>
                 <div class="skill-bar"><div class="skill-fill" style="width: 87%;"></div></div>
                 <small class="text-secondary">87%</small>
-    <div class="row g-5 align-items-center">
-        <div class="col-lg-6">
-            <h2 class="mb-5 fw-bold" id="stackTitle">Tech Stack</h2>
-            
-            <div class="skill-item">
-                <div class="skill-header"><span>PYTHON</span><span>90%</span></div>
-                <div class="progress-bar-bg"><div class="progress-fill" style="width: 90%;"></div></div>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
@@ -832,9 +769,6 @@
                 <h5>Minecraft</h5>
                 <div class="skill-bar"><div class="skill-fill" style="width: 89%;"></div></div>
                 <small class="text-secondary">89%</small>
-            <div class="skill-item">
-                <div class="skill-header"><span>JAVASCRIPT</span><span>80%</span></div>
-                <div class="progress-bar-bg"><div class="progress-fill" style="width: 80%;"></div></div>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
@@ -843,9 +777,6 @@
                 <h5>Server Mgmt</h5>
                 <div class="skill-bar"><div class="skill-fill" style="width: 80%;"></div></div>
                 <small class="text-secondary">80%</small>
-            <div class="skill-item">
-                <div class="skill-header"><span>HTML/CSS</span><span>95%</span></div>
-                <div class="progress-bar-bg"><div class="progress-fill" style="width: 95%;"></div></div>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
@@ -854,13 +785,6 @@
                 <h5>CLI/Git</h5>
                 <div class="skill-bar"><div class="skill-fill" style="width: 84%;"></div></div>
                 <small class="text-secondary">84%</small>
-        
-        <div class="col-lg-6">
-            <div class="card-3d-wrap">
-                <div class="glass-card tilt">
-                    <h3 id="mcTitle">Minecraft Tech</h3>
-                    <p class="text-secondary" id="mcDesc">Гибкая настройка серверов и плагинов. Оптимизация и создание уникального опыта.</p>
-                </div>
             </div>
         </div>
     </div>
@@ -876,15 +800,6 @@
                 <textarea id="message" placeholder="Your message..." class="form-control-dark" rows="5" required></textarea>
                 <button type="submit" class="btn-submit">Send Message</button>
                 <div id="form-status" class="form-status"></div>
-<section class="container">
-    <div class="row justify-content-center">
-        <div class="col-lg-6 glass-card tilt">
-            <h2 class="mb-4 text-center" id="contactTitle">Contact Me</h2>
-            <form action="https://formspree.io/f/niyatjon1228@gmail.com" method="POST" class="contact-form">
-                <input type="text" name="name" placeholder="Name" required id="pName">
-                <input type="email" name="email" placeholder="Email" required id="pEmail">
-                <textarea name="message" rows="4" placeholder="Message" required id="pMsg"></textarea>
-                <button type="submit" class="submit-btn" id="sendBtn">SEND</button>
             </form>
         </div>
         <div class="col-lg-6">
@@ -895,11 +810,11 @@
                 </p>
                 <div class="mb-4">
                     <p class="text-secondary mb-2"><i class="fas fa-envelope me-2" style="color: var(--accent);"></i>Email</p>
-                    <p><a href="mailto:your.email@example.com" style="color: var(--accent); text-decoration: none;">your.email@example.com</a></p>
+                    <p><a href="mailto:your.email@example.com" style="color: var(--accent); text-decoration: none;">niyatjon1228@gmail.com</a></p>
                 </div>
                 <div class="mb-4">
                     <p class="text-secondary mb-2"><i class="fas fa-map-marker-alt me-2" style="color: var(--accent);"></i>Location</p>
-                    <p>Russia</p>
+                    <p>In your home)</p>
                 </div>
                 <div>
                     <p class="text-secondary mb-2"><i class="fas fa-link me-2" style="color: var(--accent);"></i>Social</p>
@@ -915,9 +830,8 @@
 </section>
 
 <footer>
-    <p>© 2026 KRAS // SINCE DAY ONE banan sosi</p>
-    <p style="margin-top: 10px; font-size: 0.65rem; color: #555;">Designed & Built with <span style="color: var(--accent);">❤</span> | All Rights Reserved</p>
     <p>© 2026 KRAS // SINCE DAY ONE</p>
+    <p style="margin-top: 10px; font-size: 0.65rem; color: #555;">Designed & Built with <span style="color: var(--accent);">❤</span> | All Rights Reserved</p>
 </footer>
 
 <script type="application/ld+json">
@@ -936,54 +850,6 @@
 </script>
 
 <script>
-    function toggleTheme() {
-        document.body.classList.toggle('light-mode');
-        const icon = document.querySelector('.btn-ui i');
-        icon.classList.toggle('fa-moon');
-        icon.classList.toggle('fa-sun');
-    }
-
-    let currentLang = 'RU';
-    const translations = {
-        RU: {
-            loc: "Location: У тебя дома)",
-            hero: "Code & Blocks.",
-            sub: "16 лет. Программирую реальность и создаю миры.",
-            stack: "Технологии",
-            mc: "Minecraft Технологии",
-            mcd: "Гибкая настройка серверов и плагинов. Оптимизация систем.",
-            contact: "Написать мне",
-            pname: "Имя", pemail: "Почта", pmsg: "Сообщение", send: "ОТПРАВИТЬ"
-        },
-        EN: {
-            loc: "Location: Inside your house)",
-            hero: "Code & Blocks.",
-            sub: "16 years old. Programming reality and building worlds.",
-            stack: "Tech Stack",
-            mc: "Minecraft Tech",
-            mcd: "Flexible server and plugin configuration. System optimization.",
-            contact: "Contact Me",
-            pname: "Name", pemail: "Email", pmsg: "Message", send: "SEND"
-        }
-    };
-
-    function toggleLang() {
-        currentLang = currentLang === 'RU' ? 'EN' : 'RU';
-        document.getElementById('langBtn').innerText = currentLang === 'RU' ? 'EN' : 'RU';
-        const t = translations[currentLang];
-        document.getElementById('locText').innerText = t.loc;
-        document.getElementById('heroTitle').innerText = t.hero;
-        document.getElementById('heroSub').innerText = t.sub;
-        document.getElementById('stackTitle').innerText = t.stack;
-        document.getElementById('mcTitle').innerText = t.mc;
-        document.getElementById('mcDesc').innerText = t.mcd;
-        document.getElementById('contactTitle').innerText = t.contact;
-        document.getElementById('pName').placeholder = t.pname;
-        document.getElementById('pEmail').placeholder = t.pemail;
-        document.getElementById('pMsg').placeholder = t.pmsg;
-        document.getElementById('sendBtn').innerText = t.send;
-    }
-
     const cvs = document.getElementById('canvas');
     const ctx = cvs.getContext('2d');
     let pts = [];
@@ -992,7 +858,6 @@
     function init() {
         cvs.width = window.innerWidth;
         cvs.height = window.innerHeight;
-        cvs.width = window.innerWidth; cvs.height = window.innerHeight;
         pts = [];
         for(let i=0; i<85; i++) {
             pts.push({ 
@@ -1002,7 +867,6 @@
                 vy: (Math.random()-0.5)*0.5 
             });
         }
-        for(let i=0; i<80; i++) pts.push({ x: Math.random()*cvs.width, y: Math.random()*cvs.height, vx: (Math.random()-0.5)*0.5, vy: (Math.random()-0.5)*0.5 });
     }
 
     function lightning() {
@@ -1027,15 +891,8 @@
 
     function draw() {
         ctx.fillStyle = 'rgba(0,0,0,0.2)';
-        ctx.fillStyle = document.body.classList.contains('light-mode') ? 'rgba(245,245,245,0.2)' : 'rgba(0,0,0,0.2)';
         ctx.fillRect(0,0,cvs.width, cvs.height);
         lightning();
-        if(Math.random() > 0.985) {
-            ctx.strokeStyle = '#0084ff'; ctx.lineWidth = 2; ctx.beginPath();
-            let x = Math.random()*cvs.width; ctx.moveTo(x, 0);
-            for(let i=0; i<10; i++) { x += (Math.random()-0.5)*100; ctx.lineTo(x, (cvs.height/10)*i); }
-            ctx.stroke();
-        }
         pts.forEach(p => {
             p.x += p.vx; 
             p.y += p.vy;
@@ -1045,9 +902,6 @@
             ctx.beginPath(); 
             ctx.arc(p.x, p.y, 1.2, 0, Math.PI*2); 
             ctx.fill();
-            p.x += p.vx; p.y += p.vy;
-            if(p.x<0 || p.x>cvs.width) p.vx *= -1; if(p.y<0 || p.y>cvs.height) p.vy *= -1;
-            ctx.fillStyle = '#444'; ctx.beginPath(); ctx.arc(p.x, p.y, 1, 0, Math.PI*2); ctx.fill();
             let d = Math.hypot(m.x - p.x, m.y - p.y);
             if(d < 180) {
                 ctx.strokeStyle = `rgba(255, 77, 0, ${1 - d/180})`;
@@ -1057,13 +911,9 @@
                 ctx.lineTo(m.x, m.y); 
                 ctx.stroke();
             }
-            if(d < 180) { ctx.strokeStyle = `rgba(255, 77, 0, ${1 - d/180})`; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(m.x, m.y); ctx.stroke(); }
         });
         requestAnimationFrame(draw);
     }
-    window.addEventListener('mousemove', e => { m.x = e.clientX; m.y = e.clientY; });
-    window.addEventListener('resize', init);
-    init(); draw();
 
     window.addEventListener('mousemove', e => { 
         m.x = e.clientX; 
@@ -1080,7 +930,6 @@
 
     const cards = document.querySelectorAll('.glass-card');
     cards.forEach(c => {
-    document.querySelectorAll('.tilt').forEach(c => {
         c.addEventListener('mousemove', e => {
             const r = c.getBoundingClientRect();
             const x = (e.clientX - r.left) - r.width/2;
@@ -1089,9 +938,7 @@
         });
         c.addEventListener('mouseleave', () => {
             c.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg)`;
-            c.style.transform = `rotateY(${x/25}deg) rotateX(${-y/25}deg)`;
         });
-        c.addEventListener('mouseleave', () => c.style.transform = `rotateY(0deg) rotateX(0deg)`);
     });
 
     const tracks = [
@@ -1100,7 +947,6 @@
         { name: "MIYAGI - CAPTAIN", src: "https://example.com/track3.mp3" }
     ];
     
-    const tracks = [{name:"MIYAGI - BULLET", src:""}, {name:"MIYAGI - MINOR", src:""}];
     let cur = 0;
     const aud = new Audio();
     const pBtn = document.getElementById('play');
@@ -1140,10 +986,7 @@
         updateTrack(); 
         aud.play(); 
         pBtn.innerHTML = '<i class="fas fa-pause"></i>'; 
-    document.getElementById('play').onclick = () => {
-        if(aud.paused) aud.play(); else aud.pause();
     };
-
     const themeToggle = document.getElementById('theme-toggle');
     const isDarkMode = localStorage.getItem('darkMode') !== 'false';
     
@@ -1225,3 +1068,4 @@
 </script>
 
 </body>
+</html>
