@@ -16,10 +16,8 @@
         :root {
             --orange: #ff4d00;
             --black: #0a0a0a;
-            --white: #f0f0f0;
             --gray: #1e1e1e;
             --card-bg: #141414;
-            --transition: all 0.25s ease;
         }
 
         body {
@@ -27,10 +25,7 @@
             color: #ddd;
             font-family: 'Inter', sans-serif;
             line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
         }
-
-        html { scroll-behavior: auto; }
 
         #noise-bg {
             position: fixed;
@@ -56,11 +51,11 @@
             position: fixed;
             top: 18px; left: 5%; right: 5%;
             width: 90%; max-width: 1100px; margin: 0 auto;
-            background: rgba(10,10,10,0.9);
+            background: rgba(10,10,10,0.95);
             backdrop-filter: blur(6px);
             border: 1px solid #333;
             border-radius: 40px;
-            padding: 8px 18px;
+            padding: 8px 22px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -70,7 +65,7 @@
 
         .logo a {
             font-weight: 900;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             color: var(--orange);
             text-decoration: none;
             letter-spacing: -1px;
@@ -78,16 +73,19 @@
 
         .nav-links {
             display: flex;
-            gap: 28px;
+            gap: 32px;
             list-style: none;
+            margin: 0;
+            padding: 0;
         }
         .nav-links a {
             color: #ccc;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 500;
             padding: 4px 0;
-            border-bottom: 1px solid transparent;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
         }
         .nav-links a:hover {
             color: var(--orange);
@@ -98,9 +96,10 @@
             display: flex;
             gap: 6px;
             background: #222;
-            padding: 4px 10px;
+            padding: 4px 12px;
             border-radius: 30px;
             border: 1px solid #3a3a3a;
+            margin-left: 15px;
         }
         .lang span {
             font-size: 0.75rem;
@@ -110,6 +109,7 @@
             border-radius: 20px;
             color: #888;
             font-family: 'Fira Code', monospace;
+            transition: 0.2s;
         }
         .lang span.active {
             background: var(--orange);
@@ -131,6 +131,7 @@
             color: #aaa;
             font-size: 0.8rem;
             cursor: pointer;
+            transition: 0.2s;
         }
         .music-widget button:hover { color: var(--orange); }
         #trackDisplay {
@@ -146,23 +147,6 @@
             width: 45px;
             height: 3px;
             accent-color: var(--orange);
-        }
-
-        .theme-toggle {
-            background: transparent;
-            border: none;
-            color: #ccc;
-            font-size: 1rem;
-            cursor: pointer;
-            width: 32px; height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .theme-toggle:hover {
-            background: #2a2a2a;
-            color: var(--orange);
         }
 
         section {
@@ -219,19 +203,6 @@
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(255,77,0,0.15);
         }
-        .card-custom::after {
-            content: '';
-            position: absolute;
-            top: -20%; left: -20%;
-            width: 140%; height: 140%;
-            background: radial-gradient(circle, rgba(255,77,0,0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: 0.3s;
-            pointer-events: none;
-        }
-        .card-custom:hover::after {
-            opacity: 0.5;
-        }
 
         .project-badge {
             display: inline-block;
@@ -280,6 +251,7 @@
             text-align: center;
             border: 1px solid #2a2a2a;
             transition: 0.2s;
+            height: 100%;
         }
         .skill-item:hover {
             border-color: var(--orange);
@@ -340,6 +312,12 @@
             cursor: pointer;
         }
         .revealed-email { display: none; }
+        .soc-link {
+            color: #fff;
+            font-size: 1.3rem;
+            transition: 0.2s;
+        }
+        .soc-link:hover { color: var(--orange); }
 
         footer {
             border-top: 1px solid #222;
@@ -350,29 +328,9 @@
             font-family: 'Fira Code', monospace;
         }
 
-        body.light {
-            background: #f5f5f5;
-            color: #222;
-        }
-        body.light .card-custom,
-        body.light .nav-bar,
-        body.light .music-widget,
-        body.light .lang,
-        body.light .badge,
-        body.light .skill-item,
-        body.light .form-control-dark {
-            background: #fff;
-            border-color: #ccc;
-            color: #222;
-        }
-        body.light .nav-links a { color: #333; }
-        body.light .hero-desc { color: #555; }
-        body.light footer { border-top-color: #ccc; }
-        
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .music-widget { gap: 5px; }
-            .card-custom { padding: 20px; }
         }
     </style>
 </head>
@@ -383,12 +341,12 @@
     <div class="nav-bar">
         <div class="logo"><a href="#home">KRAS</a></div>
         
-        <div style="display: flex; gap: 25px; align-items: center;">
+        <div style="display: flex; align-items: center;">
             <ul class="nav-links">
-                <li><a href="#about" data-key="about">About</a></li>
-                <li><a href="#projects" data-key="projects">Projects</a></li>
-                <li><a href="#skills" data-key="skills">Skills</a></li>
-                <li><a href="#contact" data-key="contact">Contact</a></li>
+                <li><a href="#about" id="nav-about">About</a></li>
+                <li><a href="#projects" id="nav-projects">Projects</a></li>
+                <li><a href="#skills" id="nav-skills">Skills</a></li>
+                <li><a href="#contact" id="nav-contact">Contact</a></li>
             </ul>
             
             <div class="lang">
@@ -397,15 +355,12 @@
             </div>
         </div>
 
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <div class="music-widget">
-                <button id="playBtn"><i class="fas fa-play"></i></button>
-                <button id="prevBtn"><i class="fas fa-backward"></i></button>
-                <button id="nextBtn"><i class="fas fa-forward"></i></button>
-                <span id="trackDisplay">MIYAGI - BULLET</span>
-                <input type="range" id="volControl" class="vol-slider" min="0" max="1" step="0.05" value="0.5">
-            </div>
-            <button class="theme-toggle" id="lightToggle"><i class="fas fa-moon"></i></button>
+        <div class="music-widget">
+            <button id="playBtn"><i class="fas fa-play"></i></button>
+            <button id="prevBtn"><i class="fas fa-backward"></i></button>
+            <button id="nextBtn"><i class="fas fa-forward"></i></button>
+            <span id="trackDisplay">MIYAGI - BULLET</span>
+            <input type="range" id="volControl" class="vol-slider" min="0" max="1" step="0.05" value="0.5">
         </div>
     </div>
 
@@ -416,7 +371,7 @@
                     <div style="width: 40px; height: 40px; background: #2d2d2d; box-shadow: inset -3px -3px 0 #000, inset 3px 3px 0 #555; margin-bottom: 20px;">
                         <div style="width: 8px; height: 8px; background: #0ff; transform: translate(6px,6px); box-shadow: 12px 10px 0 #0ff, 6px 18px 0 #0ff;"></div>
                     </div>
-                    <h1 class="hero-title" id="heroTitle">Code & <span style="color:var(--orange);">Blocks.</span></h1>
+                    <h1 class="hero-title" id="heroTitle">Code & <span style="color:var(--orange);"></span></h1>
                     <p class="hero-desc" id="heroDesc">
                         16 years old. Full‑Stack Developer specializing in responsive web design, Python automation, and Minecraft server optimization. Passionate about creating elegant solutions and seamless user experiences.
                     </p>
@@ -434,8 +389,8 @@
             <div class="row g-4">
                 <div class="col-md-6">
                     <div class="card-custom">
-                        <h3><i class="fas fa-code" style="color:var(--orange);"></i> <span data-key="devTitle">Development</span></h3>
-                        <p class="project-desc" data-key="devDesc">Creating responsive, modern websites and web applications using cutting-edge technologies. Focused on clean code, performance optimization, and user-centric design.</p>
+                        <h3><i class="fas fa-code" style="color:var(--orange);"></i> <span id="devTitle">Development</span></h3>
+                        <p class="project-desc" id="devDesc">Creating responsive, modern websites and web applications using cutting-edge technologies. Focused on clean code, performance optimization, and user-centric design.</p>
                         <div style="font-size: 1.8rem; color: var(--orange);">
                             <i class="fab fa-html5 me-2"></i><i class="fab fa-css3-alt me-2"></i><i class="fab fa-bootstrap me-2"></i><i class="fab fa-js"></i>
                         </div>
@@ -443,34 +398,35 @@
                 </div>
                 <div class="col-md-6">
                     <div class="card-custom">
-                        <h3><i class="fas fa-cube" style="color:var(--orange);"></i> <span data-key="mcTitle">Minecraft Tech</span></h3>
-                        <p class="project-desc" data-key="mcDesc">Expert server configuration, plugin development, and system optimization. Experienced with complex configurations, performance tuning, and community management.</p>
+                        <h3><i class="fas fa-cube" style="color:var(--orange);"></i> <span id="mcTitle">Minecraft Tech</span></h3>
+                        <p class="project-desc" id="mcDesc">Expert server configuration, plugin development, and system optimization. Experienced with complex configurations, performance tuning, and community management.</p>
                         <div style="font-family:'Fira Code'; color:var(--orange);">CONFIG // PLUGINS // OPT</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
     <section id="projects">
         <div class="container">
-            <h2 class="hero-title mb-5"><span data-key="featured">Featured</span> <span style="color:var(--orange);" data-key="projects">Projects</span></h2>
+            <h2 class="hero-title mb-5"><span id="featured">Featured</span> <span style="color:var(--orange);" id="projectsTitle">Projects</span></h2>
             <div class="row g-4">
                 <div class="col-md-4">
                     <div class="card-custom">
                         <div class="project-badge">HTML5 • CSS3 • JS</div>
-                        <div class="project-title" data-key="project1Title">Portfolio Website</div>
-                        <div class="project-desc" data-key="project1Desc">Modern, responsive portfolio with interactive animations, dark/light mode toggle, and smooth scrolling. Built with Bootstrap 5 and vanilla JavaScript.</div>
+                        <div class="project-title" id="project1Title">Portfolio Website</div>
+                        <div class="project-desc" id="project1Desc">Modern, responsive portfolio with interactive animations, dark/light mode toggle, and smooth scrolling. Built with Bootstrap 5 and vanilla JavaScript.</div>
                         <div class="d-flex gap-2">
                             <a href="https://github.com/kras1228" class="btn-ghost"><i class="fab fa-github"></i> GitHub</a>
-                            <a href="#" class="btn-ghost"><i class="fas fa-link"></i> <span data-key="live">Live</span></a>
+                            <a href="#" class="btn-ghost"><i class="fas fa-link"></i> <span id="live">Live</span></a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card-custom">
                         <div class="project-badge">Python • Automation</div>
-                        <div class="project-title" data-key="project2Title">Python Automation Tools</div>
-                        <div class="project-desc" data-key="project2Desc">Utility scripts for workflow automation, data processing, and system management. Includes CLI tools and scheduling capabilities.</div>
+                        <div class="project-title" id="project2Title">Python Automation Tools</div>
+                        <div class="project-desc" id="project2Desc">Utility scripts for workflow automation, data processing, and system management. Includes CLI tools and scheduling capabilities.</div>
                         <div class="d-flex gap-2">
                             <a href="https://github.com/kras1228" class="btn-ghost"><i class="fab fa-github"></i> GitHub</a>
                         </div>
@@ -479,10 +435,10 @@
                 <div class="col-md-4">
                     <div class="card-custom">
                         <div class="project-badge">Minecraft • Config</div>
-                        <div class="project-title" data-key="project3Title">Server Configuration Kit</div>
-                        <div class="project-desc" data-key="project3Desc">Comprehensive Minecraft server setup package with optimized configurations, plugin recommendations, and performance tuning guides.</div>
+                        <div class="project-title" id="project3Title">Server Configuration Kit</div>
+                        <div class="project-desc" id="project3Desc">Comprehensive Minecraft server setup package with optimized configurations, plugin recommendations, and performance tuning guides.</div>
                         <div class="d-flex gap-2">
-                            <a href="#" class="btn-ghost disabled"><i class="fas fa-lock"></i> <span data-key="private">Private</span></a>
+                            <a href="#" class="btn-ghost disabled"><i class="fas fa-lock"></i> <span id="private">Private</span></a>
                         </div>
                     </div>
                 </div>
@@ -535,9 +491,9 @@
                         <div>
                             <span class="text-secondary"><i class="fas fa-link" style="color:var(--orange);"></i> Social</span><br>
                             <div class="d-flex gap-3 mt-2">
-                                <a href="https://t.me/pik_fra" class="soc-link" style="color:#fff;"><i class="fab fa-telegram"></i></a>
-                                <a href="https://github.com/kras1228" class="soc-link" style="color:#fff;"><i class="fab fa-github"></i></a>
-                                <a href="#" class="soc-link" style="color:#fff;"><i class="fab fa-discord"></i></a>
+                                <a href="https://t.me/pik_fra" class="soc-link" target="_blank"><i class="fab fa-telegram"></i></a>
+                                <a href="https://github.com/kras1228" class="soc-link" target="_blank"><i class="fab fa-github"></i></a>
+                                <a href="#" class="soc-link"><i class="fab fa-discord"></i></a>
                             </div>
                         </div>
                     </div>
@@ -553,10 +509,11 @@
 
     <script>
         const tracks = [
-            { name: "MIYAGI - BULLET", src: "https://example.com/a.mp3" },
-            { name: "MIYAGI - MINOR", src: "https://example.com/b.mp3" },
-            { name: "MIYAGI - CAPTAIN", src: "https://example.com/c.mp3" }
+            { name: "MIYAGI - BULLET", src: "https://raw.githubusercontent.com/kras1228/kras1228.github.io/main/music/‎Miyagi & Эндшпиль - Bullet.mp3" }
+            { name: "MIYAGI - MINOR", src: "https://example.com/track2.mp3" },
+            { name: "MIYAGI - CAPTAIN", src: "https://example.com/track3.mp3" }
         ];
+        
         let curTrack = 0;
         const audio = new Audio();
         const playBtn = document.getElementById('playBtn');
@@ -592,49 +549,79 @@
         };
         volSlider.oninput = (e) => { audio.volume = e.target.value; };
 
-        const toggle = document.getElementById('lightToggle');
-        toggle.onclick = () => {
-            document.body.classList.toggle('light');
-            const isLight = document.body.classList.contains('light');
-            toggle.innerHTML = isLight ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-            localStorage.setItem('theme', isLight ? 'light' : 'dark');
-        };
-        if (localStorage.getItem('theme') === 'light') {
-            document.body.classList.add('light');
-            toggle.innerHTML = '<i class="fas fa-sun"></i>';
-        }
-
         const langEN = {
-            'about':'About','projects':'Projects','skills':'Skills','contact':'Contact',
-            'heroTitle':'Code & ','heroDesc':'16 years old. Full‑Stack Developer specializing in responsive web design, Python automation, and Minecraft server optimization. Passionate about creating elegant solutions and seamless user experiences.',
-            'devTitle':'Development','devDesc':'Creating responsive, modern websites and web applications using cutting-edge technologies. Focused on clean code, performance optimization, and user-centric design.',
-            'mcTitle':'Minecraft Tech','mcDesc':'Expert server configuration, plugin development, and system optimization. Experienced with complex configurations, performance tuning, and community management.',
-            'featured':'Featured','projects':'Projects',
-            'project1Title':'Portfolio Website','project1Desc':'Modern, responsive portfolio with interactive animations, dark/light mode toggle, and smooth scrolling. Built with Bootstrap 5 and vanilla JavaScript.',
-            'project2Title':'Python Automation Tools','project2Desc':'Utility scripts for workflow automation, data processing, and system management. Includes CLI tools and scheduling capabilities.',
-            'project3Title':'Server Configuration Kit','project3Desc':'Comprehensive Minecraft server setup package with optimized configurations, plugin recommendations, and performance tuning guides.',
-            'live':'Live','private':'Private'
-        };
-        const langRU = {
-            'about':'Обо мне','projects':'Проекты','skills':'Навыки','contact':'Контакты',
-            'heroTitle':'Код и ','heroDesc':'16 лет. Full‑Stack разработчик: адаптивный веб, Python автоматизация, настройка серверов Minecraft. Люблю элегантные решения.',
-            'devTitle':'Разработка','devDesc':'Создание современных адаптивных сайтов и приложений. Чистый код, оптимизация, юзер-центричный дизайн.',
-            'mcTitle':'Minecraft Технологии','mcDesc':'Настройка серверов, плагины, оптимизация. Работа со сложными конфигами и комьюнити.',
-            'featured':'Избранные','projects':'Проекты',
-            'project1Title':'Сайт-портфолио','project1Desc':'Адаптивное портфолио с анимациями, переключением тем, Bootstrap 5 и чистым JS.',
-            'project2Title':'Python автоматизация','project2Desc':'Скрипты для автоматизации, обработки данных, CLI-инструменты.',
-            'project3Title':'Набор конфигураций сервера','project3Desc':'Полный пакет для настройки Minecraft сервера: конфиги, плагины, гайды.',
-            'live':'Демо','private':'Приватно'
+            'nav-about': 'About',
+            'nav-projects': 'Projects',
+            'nav-skills': 'Skills',
+            'nav-contact': 'Contact',
+            'heroTitle': 'Code & ',
+            'heroDesc': '16 years old. Full‑Stack Developer specializing in responsive web design, Python automation, and Minecraft server optimization. Passionate about creating elegant solutions and seamless user experiences.',
+            'devTitle': 'Development',
+            'devDesc': 'Creating responsive, modern websites and web applications using cutting-edge technologies. Focused on clean code, performance optimization, and user-centric design.',
+            'mcTitle': 'Minecraft Tech',
+            'mcDesc': 'Expert server configuration, plugin development, and system optimization. Experienced with complex configurations, performance tuning, and community management.',
+            'featured': 'Featured',
+            'projectsTitle': 'Projects',
+            'project1Title': 'Portfolio Website',
+            'project1Desc': 'Modern, responsive portfolio with interactive animations, dark/light mode toggle, and smooth scrolling. Built with Bootstrap 5 and vanilla JavaScript.',
+            'project2Title': 'Python Automation Tools',
+            'project2Desc': 'Utility scripts for workflow automation, data processing, and system management. Includes CLI tools and scheduling capabilities.',
+            'project3Title': 'Server Configuration Kit',
+            'project3Desc': 'Comprehensive Minecraft server setup package with optimized configurations, plugin recommendations, and performance tuning guides.',
+            'live': 'Live',
+            'private': 'Private'
         };
 
-        function setLang(lang) {
+        const langRU = {
+            'nav-about': 'Обо мне',
+            'nav-projects': 'Проекты',
+            'nav-skills': 'Навыки',
+            'nav-contact': 'Контакты',
+            'heroTitle': 'Код и ',
+            'heroDesc': '16 лет. Full‑Stack разработчик: адаптивный веб, автоматизация на Python, настройка серверов Minecraft. Создаю элегантные решения.',
+            'devTitle': 'Разработка',
+            'devDesc': 'Создание современных адаптивных сайтов и веб-приложений. Чистый код, оптимизация, пользовательский опыт.',
+            'mcTitle': 'Minecraft',
+            'mcDesc': 'Настройка серверов, плагины, оптимизация. Работа со сложными конфигами и управление сообществом.',
+            'featured': 'Избранные',
+            'projectsTitle': 'Проекты',
+            'project1Title': 'Сайт-портфолио',
+            'project1Desc': 'Адаптивное портфолио с анимациями, переключением тем. Сделано на Bootstrap 5 и чистом JS.',
+            'project2Title': 'Python автоматизация',
+            'project2Desc': 'Скрипты для автоматизации, обработки данных, CLI инструменты.',
+            'project3Title': 'Настройка сервера',
+            'project3Desc': 'Комплект для настройки Minecraft сервера: конфиги, плагины, гайды по оптимизации.',
+            'live': 'Демо',
+            'private': 'Приватно'
+        };
+
+        function setLanguage(lang) {
             const dict = lang === 'ru' ? langRU : langEN;
-            document.querySelectorAll('[data-key]').forEach(el => {
-                const key = el.getAttribute('data-key');
-                if (dict[key]) el.innerText = dict[key];
-            });
-            document.getElementById('heroTitle').innerHTML = `${dict.heroTitle}<span style="color:var(--orange);">Blocks.</span>`;
-            document.getElementById('heroDesc').innerText = dict.heroDesc;
+            
+            document.getElementById('nav-about').innerText = dict['nav-about'];
+            document.getElementById('nav-projects').innerText = dict['nav-projects'];
+            document.getElementById('nav-skills').innerText = dict['nav-skills'];
+            document.getElementById('nav-contact').innerText = dict['nav-contact'];
+            
+            document.getElementById('heroTitle').innerHTML = dict['heroTitle'] + '<span style="color:var(--orange);"></span>';
+            document.getElementById('heroDesc').innerText = dict['heroDesc'];
+            
+            document.getElementById('devTitle').innerText = dict['devTitle'];
+            document.getElementById('devDesc').innerText = dict['devDesc'];
+            document.getElementById('mcTitle').innerText = dict['mcTitle'];
+            document.getElementById('mcDesc').innerText = dict['mcDesc'];
+            
+            document.getElementById('featured').innerText = dict['featured'];
+            document.getElementById('projectsTitle').innerText = dict['projectsTitle'];
+            document.getElementById('project1Title').innerText = dict['project1Title'];
+            document.getElementById('project1Desc').innerText = dict['project1Desc'];
+            document.getElementById('project2Title').innerText = dict['project2Title'];
+            document.getElementById('project2Desc').innerText = dict['project2Desc'];
+            document.getElementById('project3Title').innerText = dict['project3Title'];
+            document.getElementById('project3Desc').innerText = dict['project3Desc'];
+            document.getElementById('live').innerText = dict['live'];
+            document.getElementById('private').innerText = dict['private'];
+
             document.querySelectorAll('.lang-opt').forEach(opt => {
                 opt.classList.toggle('active', opt.dataset.lang === lang);
             });
@@ -642,21 +629,21 @@
         }
 
         document.querySelectorAll('.lang-opt').forEach(opt => {
-            opt.addEventListener('click', (e) => setLang(e.target.dataset.lang));
+            opt.addEventListener('click', (e) => setLanguage(e.target.dataset.lang));
         });
-        setLang(localStorage.getItem('lang') || 'en');
 
+        const savedLang = localStorage.getItem('lang') || 'en';
+        setLanguage(savedLang);
+
+        // Contact form
         const form = document.getElementById('contactForm');
         const statusDiv = document.getElementById('formStatus');
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const name = document.getElementById('nameInput').value;
-            const email = document.getElementById('emailInput').value;
-            const msg = document.getElementById('msgInput').value;
             statusDiv.innerText = 'sending...';
             statusDiv.style.color = '#aaa';
             await new Promise(r => setTimeout(r, 1000));
-            statusDiv.innerText = '✓ delivered to niyatjon1228@gmail.com (demo)';
+            statusDiv.innerText = '✓ sent to niyatjon1228@gmail.com';
             statusDiv.style.color = '#4caf50';
             form.reset();
             setTimeout(() => statusDiv.innerText = '', 4000);
@@ -666,7 +653,8 @@
             document.querySelector('.obfuscated').style.display = 'none';
             document.getElementById('realMail').style.display = 'inline';
         };
-        
+
+        // 3d tilt
         document.querySelectorAll('.card-custom').forEach(c => {
             c.addEventListener('mousemove', (e) => {
                 const rect = c.getBoundingClientRect();
